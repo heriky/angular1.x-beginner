@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		.tb, .tb th, .tb td{
+			border: 1px solid #333;
+			border-collapse: collapse;
+			border-spacing: 0;
+			padding: 10px;
+		}
+	.nav{
+		padding: 0;
+		margin: 0;
+		list-style: none;
+		display: table;
+		overflow: hidden;
+		background: #333;
+	}
+	.nav-item{
+		list-style: none;
+		float: left;
+	}
+	.nav-item > a{
+		display: block;
+		height: 30px;
+		font: 16px/30px Microsoft YaHei,sans-serif;
+		color: #eee;
+		padding: 0 10px;
+		text-decoration: none;
+	}
+	.nav-item>a:hover{
+		background: #eee;
+		color: #333;
+		text-decoration: underline;
+	}
+	</style>
+	<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+	<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular-animate.min.js"></script>
+	<script src="http://apps.bdimg.com/libs/angular-route/1.3.13/angular-route.js"></script>
+</head>
+<body>
+	<div class="container" ng-app="app" ng-controller="ctrl">
+		<table class="tb">
+			<thead>
+				<tr>
+					<th>编辑</th>
+					<th>姓</th>
+					<th>名</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="user in users">
+					<td><button ng-click="edit(user.id)">编辑</button></td>
+					<td>{{user.fName}}</td>
+					<td>{{user.lName}}</td>
+				</tr>
+			</tbody>
+		</table>
+		<button ng-click="edit('new')">创建用户</button>
+
+		<hr>
+		<form class="myForm">
+			<p ng-show="isEdit">编辑用户</p>
+			<p ng-hide="isEdit">创建用户</p>
+			<input type="text" name="fName" placeholder="姓" ng-model="fName" ng-disabled="isEdit"><br><br>
+			<input type="text" name="lName" placeholder="名" ng-model="lName" ng-disabled="isEdit"><br><br>
+			<input type="text" name="pwd" placeholder="密码" ng-model="pwd"><br><br>
+			<input type="text" name="repwd" placeholder="重复密码" ng-model="repwd">
+			<span ng-show="error">两次输入的密码不一致!</span>
+			<br><br>
+			<button ng-if="!incomplete">Save</button>
+			<button ng-if="incomplete" style="pointer:not-allowed;color:red" ng-disabled="incomplete">Save</button><br><br>
+		</form>
+		<div class="include" ng-include="'x.html'" scope="" onload=""></div>
+		<br>
+		路由配置
+		<hr>
+		<ul class="nav">
+			<li class="nav-item" ng-if="currentUrl=='/home'"><a href="#/home">首页</a></li>
+			<li class="nav-item" ng-if="currentUrl!=='/home'"><a href="#/home">首页2</a></li>
+			<li class="nav-item"><a href="#/about">关于</a></li>
+		</ul>
+		<div ng-view></div>
+	</div>
+
+	<script type="text/javascript">
+		var app = angular.module('app', ['ngRoute']) ;
+		app.controller('ctrl', ['$scope', function($scope){
+			$scope.users = [{
+				id: 0,
+				fName: 'han',
+				lName: 'kang'
+			},{
+				id: 1,
+				fName: 'zhang',
+				lName: 'san'
+			},{
+				id: 2,
+				fName: 'li',
+				lName: 'si'
+			},{
+				id: 3,
+				fName: 'wang',
+				lName: 'wu'
+			}];
+			$scope.isEdit = false; // 开始阶段是创建！
+			$scope.error = false;
+			$scope.incomplete = true;
+
+			$scope.edit = function(userid){
+				if (userid === 'new') {
+					$scope.isEdit = false;
+					$scope.fName = $scope.lName = ""
+				}else{
+					$scope.isEdit = true;
+					var user = $scope.users[userid];
+					$scope.fName = user.fName;
+					$scope.lName = user.lName;
+				}
+			};
+			$scope.$watch('fName', test);
+			$scope.$watch('lName', test);
+			$scope.$watch('pwd', test);
+			$scope.$watch('repwd', test);
+
+			function test(){
+				$scope.error = $scope.pwd === $scope.repwd ? false : true;
+				if($scope.fName && $scope.fName.length!==0 && $scope.lName&&$scope.lName.length!=0 && $scope.pwd === $scope.repwd){
+					$scope.incomplete = false;
+				}else{
+					$scope.incomplete = true;
+				}
+			}
+		}]);
+
+		app.controller('homeCtrl', ['$scope','$route', function($scope, $route){
+			$scope.$route = $route;
+			$scope.currentUrl = $route.current ;
+		}]);
+		app.controller('aboutCtrl', ['$scope','$route', function($scope, $location){
+			console.log($location)
+		}])
+
+		// 配置
+		app.config(function($routeProvider){
+			// 路由配置
+			$routeProvider
+				.when('/home', {
+					template: '主页',
+					controller: "homeCtrl"
+				})
+				.when('/about', {
+					template: '关于',
+					controller: "aboutCtrl"
+				})
+				.otherwise({redirectTo: '/'})
+		})
+	</script>
+</body>
+</html>

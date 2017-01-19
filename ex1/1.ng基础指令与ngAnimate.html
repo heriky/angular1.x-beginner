@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style type="text/css">
+	.box{
+		width:  100px;
+		height: 100px;
+		border: 1px solid red;
+		background: #0f0;
+		animation: donghua 1s ease-in-out 1s forwards;
+	}
+	.username.ng-invalid{
+		background-color: red;
+	}
+	.ng-hide{
+		width: 0;
+		height: 0;
+		top: -10px;
+	}
+	@keyframes donghua {
+		to {opacity: 0; height:0}
+	}
+</style>
+<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular-animate.min.js"></script>
+</head>
+<body  ng-app='app' >
+
+<div ng-init="canClick=true">
+	<button ng-disabled="canClick">按钮</button>
+	<input type="checkbox" ng-model='canClick'>
+	<input type="checkbox" name="toggleDisplay" ng-model="isShow">
+	<div class="box" ng-hide="isShow"></div>
+</div>
+
+<div ng-controller="clickTest">
+	<button ng-click="count=count+1">点击计数</button>
+	<span>{{count}}</span>
+</div>
+
+<div ng-controller="clickTest2">
+	<button ng-click="toggle()">显示/隐藏</button>
+	<div ng-show="myVar">
+		<input type="text" name="first-name" ng-model='firstName'>
+		<input type="text" name="last-name" ng-model='lastName'>
+		<span>姓名: {{firstName + ' ' + lastName }}</span>
+	</div>
+</div>
+
+<h6>表单验证</h6>
+<form name="myForm" ng-controller="formCtrl">
+	<input type="text" ng-model="username" name="username" placeholder="请输入用户名称" required>
+	<span ng-show="myForm.username.$error.required">请输入正确的用户名</span>
+	<input type="submit" name="submit" value="提交">
+
+	<p>用户名:<br>
+		<input type="text" name="user" ng-model="username" required>
+		<span style="color:red" ng-show="myForm.user.$dirty && myForm.user.$invalid">
+		<span ng-show="myForm.user.$error.required">用户名是必须的。</span>
+		</span>
+	</p>
+</form>
+
+
+
+
+
+<script>
+	var app = angular.module('app', ['ngAnimate']);
+	app.controller('clickTest', ['$scope', function($scope){
+		$scope.count = 0 ;
+	}])
+	app.controller('clickTest2', ['$scope', function($scope){
+		$scope.firstName = 'kang';
+		$scope.lastName = 'han';
+		$scope.myVar = true;
+		$scope.toggle = function(){
+			$scope.myVar = !$scope.myVar;
+		}
+	}]);
+	app.controller('formCtrl', ['$scope', function($scope){
+		$scope.username = 'hk'
+	}])
+</script>
+</body>
+</html>
