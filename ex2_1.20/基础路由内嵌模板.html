@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>路由练习</title>
+	<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/angular-route/1.3.13/angular-route.js"></script>
+</head>
+<body ng-app="app">
+	<p><a href="#add">Add Student</a></p>
+	<p><a href="#view">View Student</a></p>
+	<hr>
+	<div ng-view></div>
+	<script type="text/ng-template" id="add.html">
+		添加视图，{{message}}
+	</script>
+	<script type="text/ng-template" id="view.html">
+		查看视图, {{message}}
+	</script>
+
+	<script type="text/javascript">
+		var app = angular.module('app', ['ngRoute']);
+		app.config(['$routeProvider',function($routeProvider) { // 配置路由
+			$routeProvider
+				.when('/add',{
+					templateUrl: 'add.html',
+					controller: 'addCtrl'
+				})
+				.when('/view', {
+					templateUrl: 'view.html',
+					controller: 'viewCtrl'
+				})
+				.otherwise({
+					redirectTo: '/view'
+				})
+		}]);
+		app.controller('addCtrl', ['$scope', function($scope){
+			$scope.message = "添加视图具体消息。"
+		}])
+		app.controller('viewCtrl', ['$scope', function($scope){
+			$scope.message = "查看视图具体消息。"
+		}])
+	</script>
+</body>
+</html>

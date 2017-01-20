@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{ padding: 0; margin: 0; }
+	</style>
+	<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+</head>
+<body>
+	<div class="container" ng-app="noteApp" ng-controller="noteCtrl">
+		<h4>笔记本</h4>
+		<textarea cols="40" rows="10" ng-model='content'></textarea>
+		<span>字数:{{140-content.length}}/140</span>
+		<p>
+			<button ng-click="clear()">清空</button>
+			<button ng-click="save()">保存</button>
+		</p>
+	</div>
+	<script type="text/javascript">
+		var app = angular.module('noteApp', []);
+		app.controller('noteCtrl', ['$scope', function($scope){
+			$scope.content = "";
+			$scope.clear = function(){
+				$scope.content = "";
+			}
+			$scope.save = function(){
+				localStorage.setItem('userComment', $scope.content.toString());
+				alert("Saved Success!")
+			}
+		}]);
+	</script>
+</body>
+</html>

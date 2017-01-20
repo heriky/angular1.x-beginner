@@ -1,0 +1,5 @@
+1. 回顾/复习昨天的内容，加深Angular基础知识的记忆和理解。
+2. 学习angular简单路由
+3. 文章阅读
+	(1) Angular 1.x和ES6的结合. https://github.com/xufei/blog/issues/29 
+ 	(2) angular1.x + ES6 风格指南： https://github.com/kuitos/kuitos.github.io/issues/34
