@@ -1,0 +1,10 @@
+.md-editor-container{
+	width:  50%;
+	height: 600px;
+	float: left;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+.md-eidtor{
+	width:  100%;
+}

@@ -1,0 +1,22 @@
+.preview-container{
+	float: left;
+	width: 50%;
+	overflow:  hidden;
+}
+.preview{
+	box-sizing: border-box;
+	padding: 0;
+	min-height: 100px;
+	height:  auto;
+	outline: 1px solid red;
+	font:  16px/20px Georgia,Microsoft YaHei,sans-serif;
+}
+.preview pre{
+	background: linear-gradient(to bottom, #ccc 50%, #fff 0,#fff);
+	background-size: 100% 40px;
+	background-origin: padding-box;
+}
+
+.preview .lang-javascript{
+	font-family: Microsoft YaHei,sans-serif;
+}

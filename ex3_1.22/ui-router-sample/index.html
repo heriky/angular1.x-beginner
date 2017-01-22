@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<script src="http://cdn.bootcss.com/angular.js/1.5.11/angular.js"></script>
+	<script src="./ui-router.js"></script>
+	<title>Document</title>
+	<style type="text/css">
+		.active{
+			color: red;
+			font-weight: bold;
+		}
+	</style>
+</head>
+<body ng-app="app">
+	<li><a ui-sref="hello" ui-sref-active='active'>Hello</a></li>
+	<li><a ui-sref="about" ui-sref-active='active'>About</a></li>
+<ui-view></ui-view>
+
+<script type="text/javascript">
+	//主模块
+	var app = angular.module('app', ['ui.router', 'app.components']); // 模块依赖注入
+	var helloState = {
+		name: 'hello',
+		url: '/hello',
+		component: 'hello',
+		// resolve: {
+		// 	people: function($transition$){
+		// 		PeopleService.getUser($transition$.params().id)
+		// 	}
+		// }
+	}
+	var aboutState = {
+	    name: 'about',
+	    url: '/about',
+	    component: 'about'
+  	}
+  	var detailState = {
+  		name: 'about.detail',
+  		url: '/detail', // 子路由
+  		component: 'detail'
+  	}
+  	app.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlRouterProvider) {
+  		$stateProvider.state(helloState);
+  		$stateProvider.state(aboutState);
+  		$stateProvider.state(detailState);
+  	}])
+
+
+
+  	// 组件模块, 定义好的模块注入到主模块中
+  	var components = angular.module('app.components', [])
+	.component('hello', {
+		template: '<h3>{{$ctrl.greeting}} Solar System!</h3>'+
+		'<button ng-click="$ctrl.toggleGreeting()">Toggle</button>',
+		controller: function(){
+			this.greeting = 'hello';
+			this.toggleGreeting = function(){
+				this.greeting = (this.greeting == 'hello') ? 'whats up' : 'hello';
+			}
+		}
+	})
+	.component('about', {
+		template: '<h4>This is about page.</h4> '+
+			'<a ui-sref="about.detail">详情</a>'+
+			'<ui-view></ui-view>'
+	})
+	.component('detail', {
+		template: '<p style="color:red">xxx {{$ctrl.content}}</p>',
+		controller: function(){
+			this.content = "This is detail of about!"
+		}
+	})
+</script>
+</body>
+</html>
