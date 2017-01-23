@@ -1,6 +1,6 @@
 0. 上午学习ui-router使用方法，练习ui-router-sample项目
 
-1. angular组件化,练习demo-basice项目，实现网页markdown编辑器
+1. angular组件化,练习demo-basic项目，实现网页markdown编辑器
 
 2. 对ui-router-sample中的程序进行组件化，出现路由组件无法渲染的情况。
 详见demo-router中代码。

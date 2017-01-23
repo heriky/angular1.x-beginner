@@ -1,0 +1,318 @@
+/*Font Face*/
+@font-face {
+  font-family: 'iconfont';
+  src: url('./fonts/iconfont.eot');
+  src: url('./fonts/iconfont.eot?#iefix') format('embedded-opentype'),
+  url('./fonts/iconfont.woff') format('woff'),
+  url('./fonts/iconfont.ttf') format('truetype'),
+  url('./fonts/iconfont.svg#iconfont') format('svg');
+}
+.iconfont{
+  font-family:"iconfont" !important;
+  font-size:16px;font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+textarea, input, button{
+	outline: none;
+}
+
+/*Common*/
+html{
+	font-size: 625%;
+	font-family: Microsoft YaHei,sans-serif;
+}
+body{
+	font-size: .16rem;
+}
+
+.clearfix{
+	display: table;
+	overflow: hidden;
+}
+
+.container{
+	margin: 0 auto;
+	width: 11.8rem;
+	position: relative;
+}
+
+@media only screen and max-width(1260px){
+	.container{
+		width:  9.6rem;
+	}
+}
+
+
+
+/*Navbar*/
+.header{
+	width: 100%;
+	height: .6rem;
+	background: #1e89e0;
+}
+.navbar{
+	height:  100%;
+}
+.logo{
+	display: inline-block;
+	vertical-align: bottom;
+	height:  100%;
+	width: 1.36rem;
+	text-indent: -99999px;
+	background: url('./images/logo.png') no-repeat center center;
+}
+.navbar__menu{
+	display: inline-block;
+	vertical-align: bottom;
+	height: 100%;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.navbar__menu li{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	float: left;
+}
+.navbar__menu-item{
+	display: block;
+	height: 100%;
+	padding: .2rem .36rem;
+	text-decoration: none;
+	color: #fff;
+}
+.navbar__menu-item:hover{
+	background: #0C77D1;
+}
+.navbar-tips{
+	position: absolute;
+	top: 0;right: 0;
+	width: 3.8rem;
+	height: 100%;
+}
+
+.navbar-tips{
+	line-height: 60px;
+	font-size: 0.14rem;
+}
+.navbar-tips__item{
+	padding: 0 .1rem;
+	display: inline-block;
+	height: 100%;
+	text-decoration: none;
+	color: #d2e7f9;
+}
+.navbar-tips__item:hover{
+	color: #fff;
+}
+
+.navbar-tips__login{
+	float: right;
+	text-decoration: none;
+	color: #fff;
+}
+.navbar-tips .iconfont{
+	margin-right: 10px;
+	font-size: 20px;
+}
+
+/*额外信息栏*/
+.extra{
+	margin-top: .1rem;
+}
+.tool{
+	overflow: hidden;
+	margin-bottom: 0.1rem;
+}
+.location{
+	float: left;
+	width: 2.68rem;
+	height: .54rem;
+	line-height: .54rem;
+	margin-top: -10px;
+	font-size: .12rem;
+	color: #333;
+}
+.location-title{
+	color: #999;
+	margin-right: .05rem;
+}
+.location-addr{
+	width: 1rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	margin-right: 5px;
+}
+.location-switch{
+	text-decoration: none;
+	color: #319fe2;
+}
+.search{
+	float: right;
+	width: auto;
+}
+.search-input{
+	box-sizing: border-box;
+	border: 1px solid #ccc;
+	border-right: none;
+	height: .32rem;
+	width: 2.22rem;
+	line-height: .30rem;
+	font: .14rem Microsoft YaHei,sans-serif;
+	padding: .1rem;
+}
+.btn-search{
+	display: inline-block;
+	vertical-align: bottom;
+	width: .46rem;
+	height: .30rem;
+	text-align: center;
+	line-height: .30rem;
+	color: #ccc;
+	border: 1px solid #ccc;
+	border-left: none;
+	text-decoration: none;
+	color: #333;
+}
+.btn-search:hover{
+	color: #0089dc;
+}
+.game{
+	position: relative;
+	height: .48rem;
+	border-bottom: 1px solid #ccc;
+}
+.game-entry{
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 186px;
+	height: 56px;
+}
+
+/*分类菜单*/
+.nav-cat{
+	font-size: .14rem;
+	border: 1px solid #e6e6e6;
+}
+.vendor-cat{
+	float: left;
+	margin: .2rem;
+	color: #666;
+}
+.cat-detail{
+	padding: .1rem .1rem .1rem .98rem;
+}
+.main-cat, .sub-cat{
+	font-size: 0;
+}
+.main-cat-item, .sub-cat-item{
+	font-size: .14rem;
+	color: #666;
+	text-decoration: none;
+	display: inline-block;
+	height: .26rem;
+	margin: 0.05rem 0.06rem;
+	padding: 0 .1rem;
+	line-height: .26rem;
+}
+.sub-cat-item:focus{
+	background: #0089dc;
+	color: #fff;
+	border-radius: 3px;
+}
+
+/*主菜单条目*/
+.main-food{
+	margin-top: .2rem;
+	border: 1px solid #e6e6e6;
+	display: flex;
+	flex-flow: row wrap;
+	align-content: flex-start;
+	justify-content: flex-start;
+}
+.main-food__item{
+	display: block;
+	width: 2.54rem;
+	padding: .2rem;
+}
+.main-food__item:hover .food-item__title{
+	color: #5b89dc;
+}
+.food-item__splash{
+	display: inline-block;
+	width: .7rem;
+	text-align: center;
+	margin-right: .2rem;
+}
+.foot-item__splash>img{
+	display: block;
+	width: .7rem;
+	height: .7rem;
+	margin-bottom: .1rem;
+}
+.time-cost{
+	color: #999;
+	font-size: .12rem;
+}
+.food-item__detail{
+	display: inline-block;
+	vertical-align: top;
+}
+.food-item__title{
+	width: 1.64rem;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-size: .16rem;
+	font-weight: 600;
+	margin: 0;
+	margin-bottom: .06rem;
+	color: #333;
+}
+.food-item__rating{
+
+}
+.sale{
+	margin-left: .1rem;
+	font-size: .12rem;
+	color: #999;
+}
+.fee{
+	margin-top: 0.03rem;
+	font-size: .12rem;
+	line-height: .18rem;
+	color: #999;
+}
+.act{
+	margin-top: 0.09rem;
+	height: .18rem;
+}
+.zhun,.bao,.piao,.xin{
+	display: inline-block;
+	width: .16rem;
+	height: .16rem;
+	font: .12rem/.16rem Microsoft YaHei,sans-serif;
+	border-radius: 2px;
+	text-align: center;
+	padding: 1px;
+	margin-right: 3px;
+	border: 1px solid #ccc;
+	color: #999;
+}
+.zhun{
+	background: #57a9ff;
+	color: #fff;
+}
+.xin{
+	background: #e75959;
+	color: #fff;
+	border: 0;
+}
+.piao{
+	background: #fff;
+}
