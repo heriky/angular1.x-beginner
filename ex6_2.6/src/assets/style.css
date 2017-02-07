@@ -31,6 +31,8 @@ html {
 
 body {
     font-size: .16rem;
+    width: calc(100% - 35px);
+    background: #f7f7f7;
 }
 
 .clearfix {
@@ -44,9 +46,19 @@ body {
     position: relative;
 }
 
-@media only screen and max-width(1260px) {
+@media only screen and (max-width:1260px) {
     .container {
         width: 9.6rem;
+    }
+    .main-food__item:nth-child(3n)>.tooltip {
+        /*响应式的模式下3n为最右侧的，做出适配*/
+        left: -100%;
+    }
+    .main-food__item:nth-child(3n)>.tooltip::after {
+        left: calc(100% - 0.05rem);
+        border: 1px solid #ccc;
+        border-left: 0;
+        border-bottom: 0;
     }
 }
 
@@ -125,6 +137,10 @@ body {
     color: #fff;
 }
 
+.navbar-tips__item i {
+    font-size: 22px;
+}
+
 .navbar-tips__login {
     float: right;
     text-decoration: none;
@@ -133,15 +149,12 @@ body {
 
 .navbar-tips .iconfont {
     margin-right: 10px;
-    font-size: 20px;
+    font-size: 24px;
+    vertical-align: middle;
 }
 
 
 /*额外信息栏*/
-
-.extra {
-    margin-top: .1rem;
-}
 
 .tool {
     overflow: hidden;
@@ -150,6 +163,7 @@ body {
 .location {
     float: left;
     height: .54rem;
+    line-height: .54rem;
     font-size: .12rem;
     color: #333;
 }
@@ -160,8 +174,8 @@ body {
 }
 
 .location-addr {
-		display: inline-block;
-		vertical-align: bottom;
+    display: inline-block;
+    vertical-align: bottom;
     width: 1.4rem;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -177,22 +191,29 @@ body {
 .search {
     float: right;
     width: auto;
+    line-height: .54rem;
 }
 
 .search-input {
     box-sizing: border-box;
     border: 1px solid #ccc;
     border-right: none;
+    vertical-align: middle;
     height: .32rem;
     width: 2.22rem;
     line-height: .30rem;
     font: .14rem Microsoft YaHei, sans-serif;
     padding: .1rem;
+    transition: width .4s ease-in-out;
+}
+
+.search-input:focus {
+    width: 3rem
 }
 
 .btn-search {
     display: inline-block;
-    vertical-align: bottom;
+    vertical-align: middle;
     width: .46rem;
     height: .30rem;
     text-align: center;
@@ -202,6 +223,7 @@ body {
     border-left: none;
     text-decoration: none;
     color: #333;
+    background: #fff;
 }
 
 .btn-search:hover {
@@ -238,11 +260,16 @@ body {
 
 .cat-detail {
     padding: .1rem .1rem .1rem .98rem;
+    background: #fff;
 }
 
 .main-cat,
 .sub-cat {
     font-size: 0;
+}
+
+.sub-cat {
+    background: #f6f6f6;
 }
 
 .main-cat-item,
@@ -257,7 +284,21 @@ body {
     line-height: .26rem;
 }
 
-.sub-cat-item:focus {
+.sub-cat-item {
+    margin: .11rem 0.06rem;
+}
+
+.main-cat-item:hover {
+    background: #f6f6f6;
+}
+
+.main-cat-selected {
+    margin: 0 0.06rem;
+    padding: 0.05rem .1rem;
+    background: #f6f6f6;
+}
+
+.sub-cat-selected {
     background: #0089dc;
     color: #fff;
     border-radius: 3px;
@@ -266,7 +307,87 @@ body {
 
 /*主菜单条目*/
 
+
+/*空项目*/
+
+.empty-vendor {
+    height: 3.36rem;
+    margin-top: .2rem;
+    text-align: center;
+    box-shadow: 0 0 1px #ccc;
+    background: #fff;
+}
+
+.v {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.empty-container {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.empty-indicator {
+    text-align: center;
+}
+
+.empty-desc {
+    margin-top: .2rem;
+    color: #ccc;
+    font-size: .14rem;
+}
+
+
+/*加载条*/
+
+.loading-container {
+    background: #fff;
+    box-shadow: 0 0 1px #ccc;
+    color: #999;
+    height: 1.8rem;
+    margin-top: .2rem;
+    text-align: center;
+    line-height: 1.8rem;
+}
+
+.loading-indicator {
+    display: inline-block;
+    position: relative;
+}
+
+.loading-indicator img {
+    display: inline-block;
+    vertical-align: middle;
+    animation: loading-rotate 1s linear infinite;
+}
+
+.loading-indicator::after {
+    content: url('./images/loading-inner.png');
+    line-height: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes loading-rotate {
+    to {
+        transform: rotate(1turn)
+    }
+}
+
+.loading-desc {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+
+/*主项目*/
+
 .main-food {
+    background: #fff;
     margin-top: .2rem;
     border: 1px solid #e6e6e6;
     display: flex;
@@ -275,11 +396,16 @@ body {
     justify-content: flex-start;
 }
 
+.main-food__container {}
+
 .main-food__item {
     display: block;
-    width: 2.54rem;
     padding: .2rem;
     position: relative;
+}
+
+.main-food__item:hover {
+    background: #F5F5F5;
 }
 
 .main-food__item:hover .food-item__title {
@@ -288,6 +414,18 @@ body {
 
 .main-food__item:hover>.tooltip {
     display: block;
+}
+
+.main-food__item:nth-child(4n)>.tooltip {
+    /*响应式的模式下4n为最右侧的，做出适配*/
+    left: -100%;
+}
+
+.main-food__item:nth-child(4n)>.tooltip::after {
+    left: calc(100% - 0.05rem);
+    border: 1px solid #ccc;
+    border-left: 0;
+    border-bottom: 0;
 }
 
 .food-item__splash {
@@ -305,9 +443,7 @@ body {
     margin-bottom: .1rem;
 }
 
-.food-item__splash::after {
-    content: '';
-    display: block;
+.food-item__splash .brand {
     position: absolute;
     top: 0;
     right: 0;
@@ -339,7 +475,25 @@ body {
     color: #333;
 }
 
-.food-item__rating {}
+.food-item__rating {
+    position: relative;
+}
+
+.food-item__rating .iconfont {
+    width: .6rem;
+    font-size: 12px;
+    color: #ccc;
+}
+
+.food-item__rating .star-yellow {
+    position: absolute;
+    width: .6rem;
+    top: 7px;
+    left: 0;
+    color: #ffc30c;
+    display: inline-block;
+    overflow: hidden;
+}
 
 .sale {
     margin-left: .1rem;
@@ -355,7 +509,7 @@ body {
 }
 
 .act {
-    margin-top: 0.09rem;
+    margin-top: 0.15rem;
     height: .18rem;
 }
 
@@ -404,7 +558,8 @@ body {
     top: 0;
     left: 100%;
     z-index: 1;
-    width: 2.92rem;
+    box-sizing: border-box;
+    width: 2.94rem;
     font-size: .12rem;
     color: #666;
     padding: 0 .16rem;
@@ -438,6 +593,11 @@ body {
     margin-top: .1rem;
     line-height: .2rem;
     font-size: .12rem;
+}
+
+.tooltip-basic {
+    line-height: .25rem;
+    background: #f5f5f5;
 }
 
 .tooltip-bao,
@@ -551,7 +711,7 @@ body {
 
 .weixin:hover {
     background: url('./images/sprites.png') no-repeat 0 -78px;
-     vertical-align: -10px;
+    vertical-align: -10px;
 }
 
 .weibo {
@@ -560,7 +720,7 @@ body {
 
 .weibo:hover {
     background: url('./images/sprites.png') no-repeat 0 -140px;
-     vertical-align: -10px;
+    vertical-align: -10px;
 }
 
 .weixin:hover >.dropbox {
@@ -618,9 +778,10 @@ body {
     height: .9rem;
 }
 
-.footer-qrcode-info{
-	float: left;
+.footer-qrcode-info {
+    float: left;
 }
+
 .footer-qrcode-info h3 {
     font-size: .16rem;
     font-weight: 700;
@@ -634,7 +795,7 @@ body {
     font-size: .12rem;
     color: #666;
     margin: 0 3px 10px;
-    line-height:  30px;
+    line-height: 30px;
 }
 
 .footer-info {
